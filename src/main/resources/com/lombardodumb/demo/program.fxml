@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lombardodumb.demo.Program">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lombardodumb.demo.HelloController">
    <children>
       <Button layoutX="40.0" layoutY="124.0" mnemonicParsing="false" onAction="#createKeys" prefHeight="103.0" prefWidth="216.0" text="Crea chiavi" />
       <Button layoutX="50.0" layoutY="380.0" mnemonicParsing="false" onAction="#uploadFile" prefHeight="25.0" prefWidth="167.0" text="Carica file" />
