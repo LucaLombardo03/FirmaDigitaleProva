@@ -5,9 +5,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 
 public class HelloController {
     
@@ -40,7 +45,7 @@ public class HelloController {
         printKeys(keyPair);
 
         //Metto le chiavi su file
-        handler.storeKeys(keyPair);
+        storeKeys(keyPair);
         
     }
 
@@ -73,4 +78,27 @@ public class HelloController {
         publicKey.setText("chiave pubblica: \n" +  Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
     }
 
+    private void storeKeys(KeyPair keyPair){
+        String formatCode = "'__'HH-mm-ss'__'dd-MM-yyyy'.txt'";
+        SimpleDateFormat formatter = new SimpleDateFormat(formatCode);
+        Date date = new Date(System.currentTimeMillis());
+        String timeEndString = formatter.format(date);
+
+
+        PrintWriter fileWriter = null;
+        try {
+            fileWriter = new PrintWriter("privateKey"+timeEndString, "UTF-8");
+            fileWriter.println(Base64.getEncoder().encodeToString(keyPair.getPrivate().toString().getBytes(StandardCharsets.UTF_8)));
+            fileWriter.close();
+
+            fileWriter = new PrintWriter("publicKey"+timeEndString,"UTF-8");
+            fileWriter.println(Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
+            fileWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
