@@ -28,12 +28,12 @@ public class Program {
 
 
     @FXML
-    private TextArea publicKey, privateKey, verificaFirma;
+    private TextArea publicKey, privateKey, isVerified;
     @FXML
     private ListView uploadedFiles;
 
     @FXML
-    protected void createKeys(){
+    protected void createKeys() {
 
         //Genero le chiavi
         KeyPairGenerator keyGen = null;
@@ -60,7 +60,7 @@ public class Program {
     }
 
     @FXML
-    protected void uploadFile(){
+    protected void uploadFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
@@ -70,7 +70,7 @@ public class Program {
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         selectedFiles = fileChooser.showOpenMultipleDialog(null);
         if (selectedFiles != null) {
-            for (File selectedfile: selectedFiles
+            for (File selectedfile : selectedFiles
             ) {
                 uploadedFiles.getItems().add(selectedfile.getAbsolutePath());
             }
@@ -81,12 +81,12 @@ public class Program {
     }
 
     @FXML
-    protected void signFile(){
+    protected void signFile() {
 
-        if(new File("privateKey.txt").exists() && selectedFiles != null) {
+        if (new File("privateKey.txt").exists() && selectedFiles != null) {
 
 
-            for (File selectedFile:selectedFiles
+            for (File selectedFile : selectedFiles
             ) {
                 try {
                     dsa = Signature.getInstance("SHA256withRSA");
@@ -94,7 +94,10 @@ public class Program {
                     dsa.update(Files.readAllBytes(Path.of(selectedFile.getAbsolutePath())));
                     byte[] signature = dsa.sign();
 
-                    return Base64.getEncoder().encodeToString(signature);
+                    PrintWriter fileWriter = new PrintWriter(selectedFile.getName(), "UTF-8");
+                    fileWriter.println(Base64.getEncoder().encodeToString(signature));
+                    fileWriter.close();
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -103,30 +106,72 @@ public class Program {
                     e.printStackTrace();
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
-                } catch (NoSuchProviderException e) {
-                    e.printStackTrace();
                 } catch (InvalidKeyException e) {
                     e.printStackTrace();
                 }
             }
 
 
-
-        } else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, "You yet have to upload the file cancer", ButtonType.OK);
             alert.showAndWait();
         }
 
     }
 
+    @FXML
+    protected void verifySign() {
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
+                    new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
+                    new FileChooser.ExtensionFilter("All Files", "*.*"));
+            List<File> filesToVerify = fileChooser.showOpenMultipleDialog(null);
+
+            if (selectedFiles != null) {
+                try {
+                    for (File selectedfile : filesToVerify
+                    ) {
+                        dsa = Signature.getInstance("SHA256withRSA");
+                        dsa.initSign(loadPrivateKFromFile());
+                        dsa.update(Files.readAllBytes(Path.of(selectedfile.getAbsolutePath())));
+                        byte[] signature = dsa.sign();
+                        isVerified.appendText(String.valueOf(dsa.verify(signature)));
+
+                    }
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SignatureException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Easter Egg", ButtonType.OK);
+                alert.showAndWait();
+            }
 
 
-    private void printKeys(KeyPair keyPair){
-        privateKey.setText("chiave privata: \n" + Base64.getEncoder().encodeToString(keyPair.getPrivate().toString().getBytes(StandardCharsets.UTF_8)));
-        publicKey.setText("chiave pubblica: \n" +  Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
+
+
     }
 
-    private void storeKeys(KeyPair keyPair){
+
+    private void printKeys(KeyPair keyPair) {
+        privateKey.setText("chiave privata: \n" + Base64.getEncoder().encodeToString(keyPair.getPrivate().toString().getBytes(StandardCharsets.UTF_8)));
+        publicKey.setText("chiave pubblica: \n" + Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
+    }
+
+    private void storeKeys(KeyPair keyPair) {
 
         PrintWriter fileWriter = null;
         try {
@@ -134,7 +179,7 @@ public class Program {
             fileWriter.println(Base64.getEncoder().encodeToString(keyPair.getPrivate().toString().getBytes(StandardCharsets.UTF_8)));
             fileWriter.close();
 
-            fileWriter = new PrintWriter("publicKey.txt","UTF-8");
+            fileWriter = new PrintWriter("publicKey.txt", "UTF-8");
             fileWriter.println(Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
             fileWriter.close();
         } catch (FileNotFoundException e) {
@@ -145,9 +190,7 @@ public class Program {
     }
 
 
-
-
-    private static PrivateKey loadPrivateKFromFile() {
+    private PrivateKey loadPrivateKFromFile() {
         PrivateKey privateKey = null;
 
         byte[] keyBytes = new byte[0];
