@@ -5,8 +5,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 
+import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 public class HelloController {
     
@@ -18,8 +19,11 @@ public class HelloController {
 
     @FXML
     protected void createKeys(){
+
+        //Genero le chiavi
         KeyPairGenerator keyGen = null;
         SecureRandom random = null;
+
         try {
             keyGen = KeyPairGenerator.getInstance("DSA", "SUN");
             random = SecureRandom.getInstance("SHA1PRNG", "SUN");
@@ -30,12 +34,12 @@ public class HelloController {
         }
 
         keyGen.initialize(1024, random);
-
         KeyPair keyPair = keyGen.generateKeyPair();
 
-        setPrivateKey("chiave privata: \n" + keyPair.getPrivate().toString());
-        setPublicKey("chiave pubblica: \n" + keyPair.getPublic().toString());
+        //Mostro a schermo le chiavi
+        printKeys(keyPair);
 
+        //Metto le chiavi su file
         handler.storeKeys(keyPair);
         
     }
@@ -64,16 +68,9 @@ public class HelloController {
 
     }
 
-    public TextArea getPrivateKey() {
-        return privateKey;
-    }
-
-    private void setPrivateKey(String privateKey) {
-        this.privateKey.setText(privateKey);
-    }
-
-    private void setPublicKey(String publicKey) {
-        this.publicKey.setText(publicKey);
+    private void printKeys(KeyPair keyPair){
+        privateKey.setText("chiave privata: \n" + Base64.getEncoder().encodeToString(keyPair.getPrivate().toString().getBytes(StandardCharsets.UTF_8)));
+        publicKey.setText("chiave pubblica: \n" +  Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
     }
 
 }
