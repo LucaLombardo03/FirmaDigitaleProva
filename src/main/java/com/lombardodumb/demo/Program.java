@@ -1,5 +1,6 @@
 package com.lombardodumb.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -13,7 +14,7 @@ import java.security.*;
 import java.util.Base64;
 import java.util.List;
 
-public class HelloController {
+public class Program {
 
     List<File> selectedFiles = null;
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lombardodumb.demo.HelloApplication">
+    <children>
+
+        <Text layoutX="7.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOLDRINI MATTEO" wrappingWidth="218.798828125" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.201171875">
+            <font>
+                <Font name="Arial Black" size="20.0" />
+            </font>
+        </Text>
+      <Text layoutX="7.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BONIOTTI MATTIA" wrappingWidth="218.798828125">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="7.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHISTOL CRISTIAN" wrappingWidth="218.798828125">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="7.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOMBARDO LUCA" wrappingWidth="218.798828125">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="7.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MANENTI ANDREA" wrappingWidth="218.798828125">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="93.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5CI" wrappingWidth="45.798828125">
+         <font>
+            <Font name="Arial Black" size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="backStart" onAction="#switchToMenu" layoutX="81.0" layoutY="220.0" mnemonicParsing="false" text="BACK">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Button>
+
+    </children>
+</AnchorPane>
