@@ -3,24 +3,24 @@ package com.lombardodumb.demo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
-import java.util.Date;
+import java.util.List;
 
 public class HelloController {
-    
-    handler handler = new handler();
-    String fileToSign = null;
+
+    List<File> selectedFiles = null;
 
     @FXML
     private TextArea publicKey, privateKey, verificaFirma;
+    @FXML
+    private ListView uploadedFiles;
 
     @FXML
     protected void createKeys(){
@@ -50,25 +50,33 @@ public class HelloController {
     }
 
     @FXML
-    protected void uploadFile(String fileDaPassare){
-        /*
-        try{
-            //TODO try to upload the file from pc
-        }catch(FileNotFoundException e){
-
-            //TODO
+    protected void uploadFile(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"),
+                new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        selectedFiles = fileChooser.showOpenMultipleDialog(null);
+        if (selectedFiles != null) {
+            for (File selectedfile: selectedFiles
+                 ) {
+                uploadedFiles.getItems().add(selectedfile.getAbsolutePath());
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Easter Egg", ButtonType.OK);
+            alert.showAndWait();
         }
-        */
     }
 
     @FXML
     protected void signFile(){
-        if(fileToSign == null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You yet have to upload the file cancer", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
-            alert.getResult();//do stuff
+        if(selectedFiles != null) {
+
         } else{
-            //TODO firma file
+            Alert alert = new Alert(Alert.AlertType.WARNING, "You yet have to upload the file cancer", ButtonType.OK);
+            alert.showAndWait();
         }
 
     }
@@ -94,6 +102,11 @@ public class HelloController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    private void signDocument(){
 
     }
+
+
 }
