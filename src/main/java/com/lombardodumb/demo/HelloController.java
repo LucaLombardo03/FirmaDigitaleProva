@@ -79,19 +79,14 @@ public class HelloController {
     }
 
     private void storeKeys(KeyPair keyPair){
-        String formatCode = "'__'HH-mm-ss'__'dd-MM-yyyy'.txt'";
-        SimpleDateFormat formatter = new SimpleDateFormat(formatCode);
-        Date date = new Date(System.currentTimeMillis());
-        String timeEndString = formatter.format(date);
-
 
         PrintWriter fileWriter = null;
         try {
-            fileWriter = new PrintWriter("privateKey"+timeEndString, "UTF-8");
+            fileWriter = new PrintWriter("privateKey.txt", "UTF-8");
             fileWriter.println(Base64.getEncoder().encodeToString(keyPair.getPrivate().toString().getBytes(StandardCharsets.UTF_8)));
             fileWriter.close();
 
-            fileWriter = new PrintWriter("publicKey"+timeEndString,"UTF-8");
+            fileWriter = new PrintWriter("publicKey.txt","UTF-8");
             fileWriter.println(Base64.getEncoder().encodeToString(keyPair.getPublic().toString().getBytes(StandardCharsets.UTF_8)));
             fileWriter.close();
         } catch (FileNotFoundException e) {
