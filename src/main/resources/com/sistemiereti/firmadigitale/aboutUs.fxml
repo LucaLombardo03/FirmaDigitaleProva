@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lombardodumb.demo.HelloApplication">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistemiereti.firmadigitale.ApplicationController">
     <children>
 
         <Text layoutX="7.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BOLDRINI MATTEO" wrappingWidth="218.798828125" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.201171875">

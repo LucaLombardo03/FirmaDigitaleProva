@@ -1,4 +1,4 @@
-package com.lombardodumb.demo;
+package com.sistemiereti.firmadigitale;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class ApplicationController extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("firstPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplicationController.class.getResource("firstPage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 744, 500);
         stage.setResizable(false);
         stage.setTitle("Firma digitale");

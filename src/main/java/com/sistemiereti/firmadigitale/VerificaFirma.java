@@ -1,4 +1,4 @@
-package com.lombardodumb.demo;
+package com.sistemiereti.firmadigitale;
 
 import java.io.*;
 import java.security.*;

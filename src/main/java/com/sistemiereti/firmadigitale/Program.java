@@ -1,4 +1,4 @@
-package com.lombardodumb.demo;
+package com.sistemiereti.firmadigitale;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
