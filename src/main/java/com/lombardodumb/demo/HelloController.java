@@ -5,8 +5,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 
-import java.io.FileNotFoundException;
 import java.security.*;
+import java.security.spec.X509EncodedKeySpec;
 
 public class HelloController {
     
@@ -14,7 +14,7 @@ public class HelloController {
     String fileToSign = null;
 
     @FXML
-    private TextArea chiavePubblica, chiavePrivata, verificaFirma;
+    private TextArea publicKey, privateKey, verificaFirma;
 
     @FXML
     protected void createKeys(){
@@ -32,8 +32,10 @@ public class HelloController {
         keyGen.initialize(1024, random);
 
         KeyPair keyPair = keyGen.generateKeyPair();
-        chiavePrivata.setText("chiave privata: \n" + keyPair.getPrivate());
-        chiavePubblica.setText("chiave pubblica: \n" + keyPair.getPublic());
+
+        setPrivateKey("chiave privata: \n" + keyPair.getPrivate().toString());
+        setPublicKey("chiave pubblica: \n" + keyPair.getPublic().toString());
+
         handler.storeKeys(keyPair);
         
     }
@@ -61,7 +63,17 @@ public class HelloController {
         }
 
     }
-    
-    
-    
+
+    public TextArea getPrivateKey() {
+        return privateKey;
+    }
+
+    private void setPrivateKey(String privateKey) {
+        this.privateKey.setText(privateKey);
+    }
+
+    private void setPublicKey(String publicKey) {
+        this.publicKey.setText(publicKey);
+    }
+
 }

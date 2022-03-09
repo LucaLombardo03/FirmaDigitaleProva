@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="497.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lombardodumb.demo.HelloController">
    <children>
-      <Button layoutX="40.0" layoutY="124.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="216.0" text="Crea chiavi" />
+      <Button layoutX="40.0" layoutY="124.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="216.0" text="Crea chiavi" onAction="#createKeys" />
       <Button layoutX="50.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Carica file" />
       <Button layoutX="148.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Firma file" />
       <Button layoutX="380.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="310.0" text="Verifica firma" />
@@ -13,8 +14,8 @@
 
       <Button layoutX="626.0" layoutY="229.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Copy" />
       <Button layoutX="626.0" layoutY="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Copy" />
-      <TextArea layoutX="299.0" layoutY="175.0" prefHeight="133.0" prefWidth="320.0" />
-      <TextArea layoutX="299.0" layoutY="26.0" prefHeight="133.0" prefWidth="320.0" />
+      <TextArea fx:id="publicKey" layoutX="299.0" layoutY="175.0" prefHeight="133.0" prefWidth="320.0" promptText="publicKey" />
+      <TextArea fx:id="privateKey" layoutX="299.0" layoutY="26.0" prefHeight="133.0" prefWidth="320.0" promptText="privateKey" />
       
    </children>
 </AnchorPane>
