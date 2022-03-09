@@ -1,5 +1,6 @@
-package com.lombardodumb.demo;
+package com.sistemiereti.firmadigitale;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -19,7 +20,7 @@ import java.util.Base64;
 import java.util.List;
 import java.security.PrivateKey;
 
-public class HelloController {
+public class Program {
 
     List<File> selectedFiles = null;
     Signature dsa = null;
